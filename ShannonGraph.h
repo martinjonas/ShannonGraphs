@@ -45,6 +45,7 @@ public:
     {
         zero->print(os);
         one->print(os);
+        os << "\"" << root << "\" [peripheries=2]; " << std::endl;
 
         for (auto node : nodes)
         {
