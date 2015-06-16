@@ -41,6 +41,9 @@ void ShannonGraph::Negate()
   GraphNode *temp = zero;
   zero = one;
   one = temp;
+
+  zero->setLabel("0");
+  one->setLabel("1");
 }
 
 void ShannonGraph::ReplaceZero(ShannonGraph replacement)

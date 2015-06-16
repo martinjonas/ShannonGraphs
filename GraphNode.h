@@ -33,6 +33,7 @@ public:
 
     void setLow(GraphNode* newValue) { low = newValue; }
     void setHigh(GraphNode* newValue) { high = newValue; }
+    void setLabel(std::string newValue) { label = newValue; }
 
     virtual void print(std::ostream& os) const = 0;
 };
