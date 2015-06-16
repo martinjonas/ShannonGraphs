@@ -15,6 +15,11 @@ public:
     {
         os << "\"" << this << "\"" <<  " [shape=box,label=\"" << label << "\"];" << std::endl;
     }
+
+    virtual void print(std::ostream &os, int boundVars) const
+    {
+        return print(os);
+    }
 };
 
 #endif // TERMINALNODE_H

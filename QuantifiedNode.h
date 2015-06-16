@@ -34,6 +34,11 @@ public:
 
     virtual bool isCluster() { return true; }
 
+    virtual void print(std::ostream& os, int boundVars) const
+    {
+        print(os);
+    }
+
     virtual void print(std::ostream& os) const
     {
         os << "subgraph \"cluster_" << this << "\" {" << std::endl;
@@ -42,7 +47,7 @@ public:
         os << (quantifier == UNIVERSAL ? "forall: " : "exists: ");
         os << boundVariables << "\";" << std::endl;
 
-        body.print(os);
+        body.print(os, boundVariables);
 
         os << "}" << std::endl;
 

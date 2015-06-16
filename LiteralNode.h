@@ -2,6 +2,9 @@
 #define LITERALNODE_H
 
 #include "GraphNode.h"
+#include <sstream>
+
+using namespace std;
 
 class LiteralNode : public GraphNode
 {
@@ -11,11 +14,35 @@ public:
 
     }
 
-    virtual void print(std::ostream& os) const
+    virtual void print(std::ostream& os, int boundVars) const
     {
-         os << "\"" << this << "\"" <<  " [label=\"" << label << "\"];" << std::endl;
+         if (boundVars > 0)
+         {
+             bool dependsOnQuantifier = false;
+             stringstream ss;
+             for (int i = 0; i < boundVars; i++)
+             {
+                ss.str("");
+                ss << "(:var " << i << ")";
+                std::string str = ss.str();
+                if (label.find(str) != string::npos)
+                {
+                    dependsOnQuantifier = true;
+                    break;
+                }
+             }
 
-         if (low != NULL)             
+             if (dependsOnQuantifier)
+             {
+                os << "\"" << this << "\"" <<  " [label=\"" << label << "\"];" << std::endl;
+             }
+             else
+             {
+                os << "\"" << this << "\"" <<  " [label=\"" << label << "\",color=blue];" << std::endl;
+             }
+         }
+
+         if (low != NULL)
          {
              if (low->isCluster())
              {
@@ -38,6 +65,11 @@ public:
                  os << "\"" << this << "\" -> " << high->getRootId() << ";" << std::endl;
              }
          }
+    }
+
+    virtual void print(std::ostream& os) const
+    {
+         print(os, 0);
     }
 };
 

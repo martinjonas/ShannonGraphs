@@ -36,6 +36,7 @@ public:
     void setLabel(std::string newValue) { label = newValue; }
 
     virtual void print(std::ostream& os) const = 0;
+    virtual void print(std::ostream& os, int boundVars) const = 0;
 };
 
 inline std::ostream& operator<< (std::ostream& out, const GraphNode& node) {

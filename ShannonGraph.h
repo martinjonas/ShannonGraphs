@@ -41,7 +41,7 @@ public:
 
     std::vector<GraphNode*> getNodes() const { return nodes; }
 
-    std::ostream& print(std::ostream& os) const
+    std::ostream& print(std::ostream& os, int boundVars=0) const
     {
         zero->print(os);
         one->print(os);
@@ -49,7 +49,7 @@ public:
 
         for (auto node : nodes)
         {
-            node->print(os);
+            node->print(os, boundVars);
         }
 
         return os;
